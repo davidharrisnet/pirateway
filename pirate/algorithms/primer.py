@@ -96,5 +96,120 @@ def exceptions():
 
     """
 
+def iterators():
+    data  = [1,2,3]
+    i = iter(data)
+    while True:
+        try:
+          print(next(i))
+        except StopIteration:
+            return
+def dictionaries():
+    i = {"name": "Joe", "age":32, "height": 32}
+    print(type(i))
+    print(i)
+    i.keys()
+    i.values()
+
+    t = tuple(i.keys())
+    print(t)
+    t = list(i.values())
+    print(t)
+    t = set(i.values())
+    print(t)
+
+    name = "charles david harris"
+    name = name.replace(' ','')
+    print(sorted(set(list(name))))
+    # how can I reverse this?
+
+def generators():
+    def factors(n):
+        results = []
+        for k in range(1, n+1):
+            if n % k == 0:
+              results.append(k)
+        return results
+
+    def yeild_factors(n):
+        for k in range(1,n+1):
+            if n % k == 0:
+                yield k
+
+    def isprime(n):
+        return len(factors(n)) == 2
+
+    #print(factors(16))
+   # print(isprime(11))
+    f = yeild_factors(32)
+    for i in f:
+        print(i)
+    pass
+
+def yeilding():
+    def a():
+        for i in range(1,11):
+            yield(i)
+    ayield = a()
+
+    # one time use
+    #print(list(ayield))
+
+    #print(next(ayield))
+    #print(next(ayield))
+
+    #for i in ayield:
+    #  print(i)
+    def even_numbers(n):
+        for x in range(n):
+            if (x % 2 == 0):
+                yield x
+
+    num = even_numbers(10)
+    print(type(num))
+    #print(list(num))
+
+def comprehension():
+  """
+   [ expression for value in iterable if condition ]
+
+   result = []
+   for value in iterable:
+     if condition:
+       result.append(expression)
+  """
+  squares = []
+  for k in range(1, 17):
+    squares.append(k*k)
+
+  # list comprehension
+  squares = [ k * k for k in range(1, 17)]
+
+  def factors(n):
+    return [k for k in range(1, n + 1) if n % k == 0]
+
+  def isprime(n):
+      return len(factors(n)) == 2
+
+  # print(factors(16))
+  # print(isprime(17))
+
+  """
+  [ k*k for k in range(l, n+1) ] 	list comprehension
+  { k*k for k in range(l, n+1) } 	set comprehension
+  ( k*k for k in range(l, n+1) ) 	generator comprehension  ( like yield )
+  { k : k*k for k in range(l, n+1) } 	dictionary comprehension
+  """
+  kgen = ( k for k in "onceuponatimethereweretwobears")
+  # print(set(list(kgen)))
+  import string
+
+  letters = [ k for k in string.ascii_lowercase ]
+  print(letters)
+
+
+  box = [[x,y] for x in range(1,11) for y in range(1,11)]
+  print(len(box))
+
 if __name__ == "__main__":
-    exceptions()
+    comprehension()
